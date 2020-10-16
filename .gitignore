@@ -1,0 +1,6 @@
+# app config
+config
+
+# change remote
+change_remote_git_to_github.sh
+change_remote_git_to_server.sh
