@@ -1,0 +1,30 @@
+# mlchat_server
+A web server for MLChat.
+
+# Compile
+$ rebar3 compile
+
+# Run
+$ rebar3 shell
+
+# Release Upgrade
+$ rebar3 release
+$ rebar3 appup generate
+$ rebar3 relup
+$ rebar3 tar
+
+# Info
+This project has been tested on Erlang/OTP 23.1.1 and uses rebar3 (3.12.0) as the build tool.
+So, install Erlang/OTP and rebar3 somewhere in your system, and make sure your shell can find them.
+
+# Here are some steps which can help you run MLChat Server.
+Step 1: Clone the project;
+
+Step 2: Get the "config" files;
+$ cp -a config.example config
+
+Step 3: Update the "config" files (server port number, etc) to satisfy your needs;
+
+Step 4: Compile and run.
+$ rebar3 compile
+$ rebar3 shell
