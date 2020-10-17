@@ -12,11 +12,12 @@
 start() ->
     mnesia:create_schema([node()]),
     mnesia:start(),
-    mnesia:create_table(chat_room, [
-                                    {type, set},
-                                    {disc_copies, [node()]},
-                                    {attributes, record_info(fields, chat_room)}
-                                   ]).
+    mnesia:create_table(chat_room,
+                        [
+                         {type, set},
+                         {disc_copies, [node()]},
+                         {attributes, record_info(fields, chat_room)}
+                        ]).
 
 stop() ->
     mnesia:stop().

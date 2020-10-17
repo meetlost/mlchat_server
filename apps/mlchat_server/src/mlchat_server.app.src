@@ -1,20 +1,18 @@
 {application,
- mlchat_server,
- [
-  {description, "A web server for MLChat."},
-  {vsn, "1.0.0"},
-  {registered, []},
-  {mod, {mlchat_server_app, []}},
-  {applications,
-   [
-    kernel,
-    stdlib,
-    mnesia,
-    cowboy,
-    jsx
-   ]},
-  {env, []},
-  {modules, []},
-  {licenses, ["ISC"]},
-  {links, []}
- ]}.
+ mlchat_server, [
+                 {description, "A web server for MLChat."},
+                 {vsn, "1.0.0"},
+                 {registered, []},
+                 {mod, {mlchat_server_app, []}},
+                 {applications, [
+                                 kernel,
+                                 stdlib,
+                                 mnesia,
+                                 cowboy,
+                                 jsx
+                                ]},
+                 {env, []},
+                 {modules, []},
+                 {licenses, ["ISC"]},
+                 {links, []}
+                ]}.

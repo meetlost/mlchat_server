@@ -58,7 +58,7 @@ chat_room_list(Req, State) ->
 
 chat_room_create(Req, State) ->
     {ok, Data, _} = cowboy_req:read_body(Req),
-    [{<<"name">>, Name}, {<<"intro">>, Intro}] = jsx:decode(Data),
+    #{<<"name">> := Name, <<"intro">> := Intro} = jsx:decode(Data, []),
     chat_room_create(Req, State, Name, Intro).
 
 chat_room_create(Req, State, Name, Intro) ->
@@ -67,7 +67,7 @@ chat_room_create(Req, State, Name, Intro) ->
                    jsx:encode(#{<<"code">> => ?RES_OK});
                {error, Reason} ->
                    jsx:encode(#{<<"code">> => ?RES_ERROR,
-                                 <<"message">> => Reason})
+                                <<"message">> => term_to_binary(Reason)})
            end,
 
     Req1 = cowboy_req:set_resp_header(<<"content-type">>, "application/json", Req),

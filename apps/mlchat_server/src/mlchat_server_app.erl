@@ -24,10 +24,10 @@ start(_Application, _Type) ->
                                  ],
                                  #{env => #{dispatch => Dispatch}}),
 
-    mlchat_server_sup:start_link(),
-    mlchat_server_db:start().
+    mlchat_server_db:start(),
+    mlchat_server_sup:start_link().
 
 stop(_Application) ->
-    cowboy:stop_listener(http),
     mlchat_server_db:stop(),
+    cowboy:stop_listener(http),
     ok.
