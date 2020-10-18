@@ -7,11 +7,8 @@ $ rebar3 compile
 # Run
 $ rebar3 shell
 
-# Release Upgrade
-$ rebar3 release
-$ rebar3 appup generate
-$ rebar3 relup
-$ rebar3 tar
+# Build
+$ rebar3 as prod tar
 
 # Info
 This project has been tested on Erlang/OTP 23.1.1 and uses rebar3 (3.12.0) as the build tool.
