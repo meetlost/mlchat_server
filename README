@@ -11,7 +11,7 @@ $ rebar3 shell
 $ rebar3 as prod tar
 
 # Info
-This project has been tested on Erlang/OTP 23.1.1 and uses rebar3 (3.12.0) as the build tool.
+This project has been tested on Erlang/OTP 23.1.1 and uses rebar3 (3.14.1) as the build tool.
 So, install Erlang/OTP and rebar3 somewhere in your system, and make sure your shell can find them.
 
 # Here are some steps which can help you run MLChat Server.
