@@ -37,14 +37,13 @@ chat_room_list(Req, State) ->
      } = cowboy_req:match_qs([ pageNumber, pageSize ], Req),
     PageNumber1 = binary_to_integer(PageNumber),
     PageSize1 = binary_to_integer(PageSize),
-    DBLimitStart = (PageNumber1 - 1) * PageSize1,
-    DBLimitLen = PageSize1,
 
-    Body = case mlchat_server_db:get_chat_room_list(DBLimitStart, DBLimitLen) of
+    Body = case mlchat_server_db:get_chat_room_list(PageNumber1, PageSize1) of
                {ok, RoomList, Total} ->
+                   RoomList1 = [ #{ name => Name, intro => Intro } || {Name, Intro} <- RoomList ],
                    jsx:encode(#{
                                 <<"code">> => ?RES_OK,
-                                <<"room_list">> => RoomList,
+                                <<"room_list">> => RoomList1,
                                 <<"total">> => Total
                                });
                {error, Reason} ->

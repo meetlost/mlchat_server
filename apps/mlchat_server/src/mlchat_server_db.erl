@@ -15,7 +15,7 @@ start() ->
     mnesia:create_table(chat_room,
                         [
                          {type, set},
-                         {disc_copies, [ node() ]},
+                         %% {disc_copies, [ node() ]},
                          {attributes, record_info(fields, chat_room)}
                         ]).
 
@@ -23,23 +23,23 @@ stop() ->
     mnesia:stop().
 
 %% Get Chat Room List
--spec get_chat_room_list(Start, Len) -> {ok, ChatRoomList, Total} | {error, Reason} when
-      Start :: pos_integer(),
-      Len :: pos_integer(),
+-spec get_chat_room_list(PageNumber, PageSize) -> {ok, ChatRoomList, Total} | {error, Reason} when
+      PageNumber :: pos_integer(),
+      PageSize :: pos_integer(),
       ChatRoomList :: [ {Name :: atom(), Intro :: [ term() ]} ],
       Total :: non_neg_integer(),
       Reason :: term().
 
-get_chat_room_list(Start, Len) ->
+get_chat_room_list(PageNumber, PageSize) ->
     F = fun() ->
                 QH = qlc:q([ {E#chat_room.name, E#chat_room.intro} || E <- mnesia:table(chat_room) ]),
                 QC = qlc:cursor(QH),
                 if
-                    Start =:= 1 ->
-                        qlc:next_answers(QC, Len);
-                    Start > 1 ->
-                        qlc:next_answers(QC, Start - 1),
-                        qlc:next_answers(QC, Len);
+                    PageNumber =:= 1 ->
+                        qlc:next_answers(QC, PageSize);
+                    PageNumber > 1 ->
+                        qlc:next_answers(QC, (PageNumber - 1) * PageSize),
+                        qlc:next_answers(QC, PageSize);
                     true ->
                         []
                 end
