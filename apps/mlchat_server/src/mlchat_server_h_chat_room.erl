@@ -43,8 +43,10 @@ chat_room_list(Req, State) ->
                    RoomList1 = [ #{ name => Name, intro => Intro } || {Name, Intro} <- RoomList ],
                    jsx:encode(#{
                                 <<"code">> => ?RES_OK,
-                                <<"room_list">> => RoomList1,
-                                <<"total">> => Total
+                                <<"res">> => #{
+                                               <<"list">> => RoomList1,
+                                               <<"total">> => Total
+                                              }
                                });
                {error, Reason} ->
                    jsx:encode(#{
