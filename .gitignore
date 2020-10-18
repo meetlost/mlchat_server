@@ -2,9 +2,9 @@
 _build
 log
 
-# app config
+# App Config
 config
 
-# change remote
+# Change Remote
 change_remote_git_to_github.sh
 change_remote_git_to_server.sh
