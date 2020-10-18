@@ -13,6 +13,6 @@
                                 ]},
                  {env, []},
                  {modules, []},
-                 {licenses, ["ISC"]},
+                 {licenses, [ "ISC" ]},
                  {links, []}
                 ]}.
