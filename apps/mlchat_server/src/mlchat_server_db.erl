@@ -14,7 +14,7 @@ start() ->
     mnesia:start(),
     mnesia:create_table(chat_room,
                         [
-                         {type, set},
+                         {type, ordered_set},
                          %% {disc_copies, [ node() ]},
                          {attributes, record_info(fields, chat_room)}
                         ]).
@@ -34,19 +34,20 @@ get_chat_room_list(PageNumber, PageSize) ->
     F = fun() ->
                 QH = qlc:q([ {E#chat_room.name, E#chat_room.intro} || E <- mnesia:table(chat_room) ]),
                 QC = qlc:cursor(QH),
+                Total = length(qlc:e(QH)),
                 if
                     PageNumber =:= 1 ->
-                        qlc:next_answers(QC, PageSize);
+                        {qlc:next_answers(QC, PageSize), Total};
                     PageNumber > 1 ->
                         qlc:next_answers(QC, (PageNumber - 1) * PageSize),
-                        qlc:next_answers(QC, PageSize);
+                        {qlc:next_answers(QC, PageSize), Total};
                     true ->
-                        []
+                        {[], Total}
                 end
         end,
     case mnesia:transaction(F) of
-        {atomic, Res} ->
-            {ok, Res, length(Res)};
+        {atomic, {RoomList, Total} = Res} ->
+            {ok, RoomList, Total};
         {aborted, Reason} ->
             {error, Reason}
     end.
