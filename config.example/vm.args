@@ -2,7 +2,5 @@
 
 -setcookie mlchat_server_cookie
 
--mnesia dir '"./db_data"'
-
 +K true
 +A30
