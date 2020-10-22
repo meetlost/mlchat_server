@@ -60,7 +60,14 @@ get_chat_room_list(PageNumber, PageSize) ->
 
 store_chat_room(Name, Intro) ->
     F = fun() ->
-                mnesia:write(#chat_room{name = Name, intro = Intro})
+                QH = qlc:q([ {E#chat_room.name, E#chat_room.intro} || E <- mnesia:table(chat_room) ]),
+                Total = length(qlc:e(QH)),
+                if
+                    Total + 1 > 1000 ->
+                        mnesia:abort('Too Many Chat Room');
+                    true ->
+                        mnesia:write(#chat_room{name = Name, intro = Intro})
+                end
         end,
     case mnesia:transaction(F) of
         {atomic, _Res} ->
