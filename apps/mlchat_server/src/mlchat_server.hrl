@@ -1,4 +1,6 @@
+%%%
 %%% MLChat Server Header
+%%%
 
 %% App Name
 -define(APP_NAME, mlchat_server).

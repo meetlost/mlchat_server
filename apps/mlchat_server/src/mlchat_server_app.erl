@@ -1,10 +1,12 @@
+%%%
 %%% MLChat Server App
+%%%
 
 -module(mlchat_server_app).
 
 -behaviour(application).
 
--export([ start/2, stop/1 ]).
+-export([start/2, stop/1]).
 
 -include("mlchat_server.hrl").
 
@@ -18,8 +20,8 @@ start(_Application, _Type) ->
                                      ]),
     {ok, ConfigPort} = application:get_env(?APP_NAME, port),
     {ok, _} = cowboy:start_clear(http,
-                                 [ {port, ConfigPort} ],
-                                 #{ env => #{ dispatch => Dispatch } }),
+                                 [{port, ConfigPort}],
+                                 #{env => #{dispatch => Dispatch}}),
 
     mlchat_server_db:start(),
     mlchat_server_sup:start_link().

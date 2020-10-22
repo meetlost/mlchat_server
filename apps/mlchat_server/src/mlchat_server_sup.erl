@@ -1,14 +1,16 @@
+%%%
 %%% MLChat Server Supervisor
+%%%
 
 -module(mlchat_server_sup).
 
 -behaviour(supervisor).
 
 %% API
--export([ start_link/0 ]).
+-export([start_link/0]).
 
 %% Supervisor Callbacks
--export([ init/1 ]).
+-export([init/1]).
 
 -define(SERVER, ?MODULE).
 

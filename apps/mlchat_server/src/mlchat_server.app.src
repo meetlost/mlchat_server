@@ -1,7 +1,7 @@
 {application,
  mlchat_server, [
                  {description, "A web server for MLChat."},
-                 {vsn, "1.0.0"},
+                 {vsn, "0.1.0"},
                  {registered, []},
                  {mod, {mlchat_server_app, []}},
                  {applications, [
@@ -13,6 +13,6 @@
                                 ]},
                  {env, []},
                  {modules, []},
-                 {licenses, [ "ISC" ]},
+                 {licenses, ["ISC"]},
                  {links, []}
                 ]}.
