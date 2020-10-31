@@ -48,7 +48,7 @@ get_chat_room_list(PageNumber, PageSize) ->
                 end
         end,
     case mnesia:transaction(F) of
-        {atomic, {RoomList, Total} = Res} ->
+        {atomic, {RoomList, Total}} ->
             {ok, RoomList, Total};
         {aborted, Reason} ->
             {error, Reason}
