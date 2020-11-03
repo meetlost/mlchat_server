@@ -12,6 +12,7 @@
 -record(chat_room, {name, intro}).
 
 start() ->
+    stop(), % Make sure mnesia:create_schema/1 always works.
     mnesia:create_schema([node()]),
     mnesia:start(),
     mnesia:create_table(chat_room,
