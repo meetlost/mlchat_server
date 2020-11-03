@@ -1,8 +1,15 @@
 # Misc
 lib_erlang
 TAGS
+
+# Build
 _build
+
+# Log
 log
+
+# DB
+db_data
 
 # App Config
 config

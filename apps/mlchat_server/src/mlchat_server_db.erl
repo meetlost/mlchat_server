@@ -17,7 +17,7 @@ start() ->
     mnesia:create_table(chat_room,
                         [
                          {type, ordered_set},
-                         %% {disc_copies, [node()]},
+                         {disc_copies, [node()]},
                          {attributes, record_info(fields, chat_room)}
                         ]).
 
