@@ -18,9 +18,10 @@ start(_Application, _Type) ->
                                              {"/ws/:chat_room/:username", mlchat_server_h_ws, []}
                                             ]}
                                      ]),
+    {ok, IP} = application:get_env(?APP_NAME, ip),
     {ok, ConfigPort} = application:get_env(?APP_NAME, port),
     {ok, _} = cowboy:start_clear(http,
-                                 [{port, ConfigPort}],
+                                 [{ip, IP}, {port, ConfigPort}],
                                  #{env => #{dispatch => Dispatch}}),
 
     mlchat_server_db:start(),
